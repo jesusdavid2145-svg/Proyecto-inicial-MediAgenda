@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediAgenda - Iniciar sesión</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="login-page">
+
+    <nav class="menu-principal">
+        <div class="menu-logo">
+            <span>♡</span>
+            <strong>MediAgenda</strong>
+        </div>
+
+        <div class="menu-links">
+            <a href="index.html">Inicio</a>
+            <a href="acerca.html">Acerca de nosotros</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="tutorial.html">Tutorial</a>
+           
+        </div>
+    </nav>
+
+    <main class="login-layout">
+
+        <section class="welcome-section">
+            <div class="welcome-content">
+                <h1>Bienvenido a <br><span>MediAgenda</span></h1>
+                <p class="welcome-text">
+                    Gestiona tus citas médicas de forma fácil, segura y eficiente.
+                </p>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">📅</div>
+                    <div>
+                        <h3>Agenda y administra</h3>
+                        <p>tus citas médicas</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🛡️</div>
+                    <div>
+                        <h3>Accede de forma segura</h3>
+                        <p>a tu información</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">👥</div>
+                    <div>
+                        <h3>Atención médica</h3>
+                        <p>más organizada</p>
+                    </div>
+                </div>
+            </div>
+
+            <img src="img/doctora.png" alt="Profesional médica usando MediAgenda" class="doctor-image">
+        </section>
+
+        <section class="login-panel">
+            <div class="login-box">
+                <div class="login-logo">
+                    <div class="logo-icon">♡</div>
+                    <h2>MediAgenda</h2>
+                </div>
+
+                <h1>Iniciar sesión</h1>
+                <p class="login-description">
+                    Accede a tu cuenta para gestionar tus citas médicas
+                </p>
+
+                <form id="loginForm">
+                    <label for="correo">Correo electrónico</label>
+                    <div class="input-group">
+                        <span>✉</span>
+                        <input type="email" id="correo" placeholder="ejemplo@correo.com">
+                    </div>
+
+                    <label for="contrasena">Contraseña</label>
+                    <div class="input-group">
+                        <span>🔒</span>
+                        <input type="password" id="contrasena" placeholder="Ingresa tu contraseña">
+                    </div>
+
+                    <div class="login-options">
+                        <label class="remember">
+                            <input type="checkbox">
+                            Recordarme
+                        </label>
+
+                        <a href="#">¿Olvidaste tu contraseña?</a>
+                    </div>
+
+                    <button type="submit" class="main-button">Iniciar sesión</button>
+
+                    <a href="registro.html" class="secondary-button">Crear cuenta</a>
+                </form>
+
+                <p class="terms-text">
+                    Al continuar aceptas los <a href="#">términos y condiciones</a>
+                    y la <a href="#">política de privacidad</a>.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="login-footer">
+        <div>
+            <span>♡ MediAgenda © 2026</span>
+            <span>•</span>
+            <span>Todos los derechos reservados</span>
+            <span>•</span>
+            <span>Hecho en Colombia 🇨🇴</span>
+        </div>
+
+        <div>
+            <a href="#">Términos y condiciones</a>
+            <span>•</span>
+            <a href="#">Política de privacidad</a>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

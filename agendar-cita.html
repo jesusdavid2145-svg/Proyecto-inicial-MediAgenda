@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar cita - MediAgenda</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <h1>Agendar cita médica</h1>
+        <p>Completa los datos para programar tu atención</p>
+    </header>
+
+    <main class="form-container">
+        <section class="form-card">
+            <form id="citaForm">
+                <label for="especialidad">Especialidad</label>
+                <select id="especialidad">
+                    <option value="">Seleccione</option>
+                    <option value="general">Medicina general</option>
+                    <option value="odontologia">Odontología</option>
+                    <option value="pediatria">Pediatría</option>
+                </select>
+
+                <label for="medico">Médico</label>
+                <select id="medico">
+                    <option value="">Seleccione</option>
+                    <option value="1">Dra. Laura Gómez</option>
+                    <option value="2">Dr. Carlos Ramírez</option>
+                </select>
+
+                <label for="sede">Sede</label>
+                <select id="sede">
+                    <option value="">Seleccione</option>
+                    <option value="central">Clínica Central</option>
+                    <option value="norte">Consultorio Norte</option>
+                </select>
+
+                <label for="modalidad">Modalidad</label>
+                <select id="modalidad">
+                    <option value="">Seleccione</option>
+                    <option value="presencial">Presencial</option>
+                    <option value="virtual">Virtual</option>
+                </select>
+
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha">
+
+                <label for="hora">Hora</label>
+                <input type="time" id="hora">
+
+                <label for="motivo">Motivo de consulta</label>
+                <textarea id="motivo" placeholder="Describe brevemente el motivo de la cita"></textarea>
+
+                <button type="submit">Confirmar cita</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
