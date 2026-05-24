@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediAgenda - Ajustes de cuenta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/ajustes.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a class="header-logo" href="dashboard.html">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="10" fill="#fff" fill-opacity="0.2"/>
+        <path d="M20 13V27M13 20H27" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      MediAgenda
+    </a>
+    <div class="header-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Buscar pacientes, citas, médicos..." />
+    </div>
+    <div class="header-right">
+      <a href="#" class="header-help">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+        ¿Necesitas ayuda?
+      </a>
+      <div class="notif-wrap" onclick="toggleNotif()">
+        <button class="notif-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-badge" id="notif-badge">3</span>
+        </button>
+        <div class="notif-dropdown" id="notif-dropdown">
+          <div class="notif-header">
+            <span>Notificaciones</span>
+            <button onclick="marcarTodasLeidas()">Marcar todas como leídas</button>
+          </div>
+          <div class="notif-item unread">
+            <div class="notif-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <div class="notif-content"><p>Cita confirmada con Dra. Laura Méndez</p><span>22 May 2025 · 09:30 AM</span></div>
+          </div>
+          <div class="notif-item unread">
+            <div class="notif-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div class="notif-content"><p>Recordatorio: cita mañana a las 9:30 AM</p><span>Hace 2 horas</span></div>
+          </div>
+          <div class="notif-item unread">
+            <div class="notif-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
+            <div class="notif-content"><p>Cita cancelada por Dr. Felipe Ruiz</p><span>Hace 1 día</span></div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="notif-content"><p>Historial clínico actualizado correctamente</p><span>Hace 3 días</span></div>
+          </div>
+          <div class="notif-footer"><a href="notificaciones.html">Ver todas las notificaciones</a></div>
+        </div>
+      </div>
+      <div class="profile-wrap">
+        <div class="profile-avatar">JR</div>
+        <div class="profile-dropdown">
+          <div class="profile-info">
+            <div class="profile-avatar-lg">JR</div>
+            <div>
+              <p class="profile-nombre">Jesús Ramírez</p>
+              <p class="profile-rol">Administrador</p>
+            </div>
+          </div>
+          <div class="profile-divider"></div>
+          <a href="#" class="profile-option">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Editar perfil
+          </a>
+          <a href="ajustes.html" class="profile-option">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Configuración
+          </a>
+          <div class="profile-divider"></div>
+          <a href="index.html" class="profile-option danger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Cerrar sesión
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Inicio
+        </a>
+        <a href="agendar.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Agendar cita
+        </a>
+        <a href="gestion-citas.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Mis citas
+        </a>
+        <a href="historial.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Historial clínico
+        </a>
+        <a href="notificaciones.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Notificaciones
+          <span class="badge">3</span>
+        </a>
+        <a href="reportes.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Reportes administrativos
+        </a>
+        <a href="#" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Gestión de usuarios
+        </a>
+        <a href="ajustes.html" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Ajustes de cuenta
+        </a>
+      </nav>
+      <a href="index.html" class="nav-item cerrar-sesion">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Cerrar sesión
+      </a>
+    </aside>
+
+    <!-- CONTENIDO -->
+    <main>
+      <div class="page-header">
+        <h1>Ajustes de cuenta</h1>
+        <p>Administra tu información personal, seguridad y preferencias de la plataforma.</p>
+      </div>
+
+      <!-- ALERTA GLOBAL -->
+      <div class="alerta" id="alerta-global" style="display:none;"></div>
+
+      <div class="ajustes-grid">
+
+        <!-- COLUMNA PRINCIPAL -->
+        <div class="main-col">
+
+          <!-- INFORMACIÓN PERSONAL -->
+          <div class="seccion-card">
+            <div class="seccion-header">
+              <div class="seccion-icon blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <div>
+                <h3>Información personal</h3>
+                <p>Actualiza tus datos personales y de contacto.</p>
+              </div>
+            </div>
+
+            <!-- Avatar -->
+            <div class="avatar-section">
+              <div class="avatar-grande">JR</div>
+              <div class="avatar-info">
+                <p class="avatar-nombre">Jesús Ramírez</p>
+                <p class="avatar-rol">Administrador · CC 1.234.567.890</p>
+                <button class="btn-cambiar-foto">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                  Cambiar foto
+                </button>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label>Nombres <span class="req">*</span></label>
+                <div class="input-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <input type="text" id="nombres" value="Jesús" placeholder="Ingresa tus nombres" />
+                </div>
+              </div>
+              <div class="field">
+                <label>Apellidos <span class="req">*</span></label>
+                <div class="input-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <input type="text" id="apellidos" value="Ramírez" placeholder="Ingresa tus apellidos" />
+                </div>
+              </div>
+              <div class="field">
+                <label>Tipo de documento <span class="req">*</span></label>
+                <div class="input-wrap select-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>
+                  <select id="tipo-doc">
+                    <option value="cc" selected>Cédula de ciudadanía</option>
+                    <option value="ce">Cédula de extranjería</option>
+                    <option value="pa">Pasaporte</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label>Número de documento <span class="req">*</span></label>
+                <div class="input-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>
+                  <input type="text" id="num-doc" value="1.234.567.890" />
+                </div>
+              </div>
+              <div class="field">
+                <label>Correo electrónico <span class="req">*</span></label>
+                <div class="input-wrap" id="wrap-correo">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <input type="email" id="correo" value="jesus@correo.com" />
+                </div>
+              </div>
+              <div class="field">
+                <label>Número telefónico</label>
+                <div class="input-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12 19.79 19.79 0 0 1 1.08 3.42 2 2 0 0 1 3.06 1.25h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6.29 6.29l1.32-1.22a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  <input type="tel" id="telefono" value="+57 310 123 4567" />
+                </div>
+              </div>
+              <div class="field">
+                <label>Fecha de nacimiento</label>
+                <div class="input-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <input type="date" id="fecha-nac" value="1991-03-15" />
+                </div>
+              </div>
+              <div class="field">
+                <label>Género</label>
+                <div class="input-wrap select-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <select id="genero">
+                    <option value="masculino" selected>Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
+                    <option value="no-especifica">Prefiero no especificar</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="seccion-footer">
+              <button class="btn-guardar" onclick="guardarPerfil()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><polyline points="20 6 9 17 4 12"/></svg>
+                Guardar cambios
+              </button>
+            </div>
+          </div>
+
+          <!-- CAMBIAR CONTRASEÑA -->
+          <div class="seccion-card">
+            <div class="seccion-header">
+              <div class="seccion-icon green">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </div>
+              <div>
+                <h3>Cambiar contraseña</h3>
+                <p>Actualiza tu contraseña para mantener tu cuenta segura.</p>
+              </div>
+            </div>
+
+            <div class="form-col">
+              <div class="field">
+                <label>Contraseña actual <span class="req">*</span></label>
+                <div class="input-wrap" id="wrap-pass-actual">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <input type="password" id="pass-actual" placeholder="Ingresa tu contraseña actual" />
+                  <button class="eye-btn" onclick="togglePass('pass-actual', 'eye-actual')">
+                    <svg id="eye-actual" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="field">
+                <label>Nueva contraseña <span class="req">*</span></label>
+                <div class="input-wrap" id="wrap-pass-nueva">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <input type="password" id="pass-nueva" placeholder="Mínimo 8 caracteres" oninput="evaluarFortaleza()" />
+                  <button class="eye-btn" onclick="togglePass('pass-nueva', 'eye-nueva')">
+                    <svg id="eye-nueva" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+                <!-- Fortaleza -->
+                <div class="fortaleza-wrap" id="fortaleza-wrap" style="display:none;">
+                  <div class="fortaleza-barras">
+                    <div class="barra" id="barra-1"></div>
+                    <div class="barra" id="barra-2"></div>
+                    <div class="barra" id="barra-3"></div>
+                    <div class="barra" id="barra-4"></div>
+                  </div>
+                  <span class="fortaleza-label" id="fortaleza-label"></span>
+                </div>
+              </div>
+              <div class="field">
+                <label>Confirmar nueva contraseña <span class="req">*</span></label>
+                <div class="input-wrap" id="wrap-pass-confirmar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <input type="password" id="pass-confirmar" placeholder="Repite tu nueva contraseña" />
+                  <button class="eye-btn" onclick="togglePass('pass-confirmar', 'eye-confirmar')">
+                    <svg id="eye-confirmar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+                <p class="field-error" id="error-pass"></p>
+              </div>
+            </div>
+
+            <div class="seccion-footer">
+              <button class="btn-guardar" onclick="cambiarContrasena()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Cambiar contraseña
+              </button>
+            </div>
+          </div>
+
+          <!-- NOTIFICACIONES -->
+          <div class="seccion-card">
+            <div class="seccion-header">
+              <div class="seccion-icon orange">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              </div>
+              <div>
+                <h3>Preferencias de notificaciones</h3>
+                <p>Elige qué notificaciones deseas recibir.</p>
+              </div>
+            </div>
+
+            <div class="toggle-lista">
+              <div class="toggle-item">
+                <div class="toggle-info">
+                  <p class="toggle-titulo">Recordatorios de citas</p>
+                  <p class="toggle-sub">Recibe avisos antes de tus citas médicas</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked onchange="guardarPreferencia('recordatorios', this.checked)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="toggle-item">
+                <div class="toggle-info">
+                  <p class="toggle-titulo">Confirmaciones de cita</p>
+                  <p class="toggle-sub">Notificaciones cuando una cita sea confirmada o cancelada</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked onchange="guardarPreferencia('confirmaciones', this.checked)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="toggle-item">
+                <div class="toggle-info">
+                  <p class="toggle-titulo">Resultados de laboratorio</p>
+                  <p class="toggle-sub">Avisos cuando tus resultados estén disponibles</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked onchange="guardarPreferencia('resultados', this.checked)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="toggle-item">
+                <div class="toggle-info">
+                  <p class="toggle-titulo">Actualizaciones del sistema</p>
+                  <p class="toggle-sub">Notificaciones sobre cambios y mejoras de la plataforma</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" onchange="guardarPreferencia('sistema', this.checked)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="toggle-item">
+                <div class="toggle-info">
+                  <p class="toggle-titulo">Notificaciones por correo</p>
+                  <p class="toggle-sub">Recibe copias de las notificaciones en tu correo</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked onchange="guardarPreferencia('email', this.checked)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="toggle-item">
+                <div class="toggle-info">
+                  <p class="toggle-titulo">Notificaciones por SMS</p>
+                  <p class="toggle-sub">Recibe recordatorios por mensaje de texto</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" onchange="guardarPreferencia('sms', this.checked)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEGURIDAD -->
+          <div class="seccion-card">
+            <div class="seccion-header">
+              <div class="seccion-icon purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <h3>Seguridad</h3>
+                <p>Gestiona tus sesiones activas y la seguridad de tu cuenta.</p>
+              </div>
+            </div>
+
+            <div class="alerta-sesiones">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" width="18" height="18"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <p>Tienes <strong>2 sesiones activas</strong> en otros dispositivos. Revisa y ciérralas si no las reconoces.</p>
+            </div>
+
+            <div class="sesiones-lista">
+              <div class="sesion-item activa">
+                <div class="sesion-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <div class="sesion-info">
+                  <p class="sesion-dispositivo">Windows · Chrome 124</p>
+                  <p class="sesion-detalle">Bogotá, Colombia · Sesión actual</p>
+                </div>
+                <span class="sesion-badge actual">Actual</span>
+              </div>
+              <div class="sesion-item">
+                <div class="sesion-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                </div>
+                <div class="sesion-info">
+                  <p class="sesion-dispositivo">Android · Chrome Mobile</p>
+                  <p class="sesion-detalle">Bogotá, Colombia · Hace 2 horas</p>
+                </div>
+                <button class="btn-cerrar-sesion" onclick="cerrarSesionDispositivo(this)">Cerrar</button>
+              </div>
+              <div class="sesion-item">
+                <div class="sesion-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <div class="sesion-info">
+                  <p class="sesion-dispositivo">MacOS · Safari 17</p>
+                  <p class="sesion-detalle">Medellín, Colombia · Hace 1 día</p>
+                </div>
+                <button class="btn-cerrar-sesion" onclick="cerrarSesionDispositivo(this)">Cerrar</button>
+              </div>
+            </div>
+
+            <div class="seccion-footer">
+              <button class="btn-secundario" onclick="cerrarTodasSesiones()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Cerrar todas las demás sesiones
+              </button>
+            </div>
+          </div>
+
+          <!-- APARIENCIA -->
+          <div class="seccion-card">
+            <div class="seccion-header">
+              <div class="seccion-icon teal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              </div>
+              <div>
+                <h3>Apariencia y región</h3>
+                <p>Personaliza el idioma y la zona horaria.</p>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label>Idioma</label>
+                <div class="input-wrap select-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <select id="idioma">
+                    <option value="es" selected>Español</option>
+                    <option value="en">English</option>
+                    <option value="pt">Português</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label>Zona horaria</label>
+                <div class="input-wrap select-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <select id="zona-horaria">
+                    <option value="america-bogota" selected>América/Bogotá (GMT-5)</option>
+                    <option value="america-lima">América/Lima (GMT-5)</option>
+                    <option value="america-mexico">América/México (GMT-6)</option>
+                    <option value="america-buenos-aires">América/Buenos Aires (GMT-3)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="seccion-footer">
+              <button class="btn-guardar" onclick="guardarApariencia()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><polyline points="20 6 9 17 4 12"/></svg>
+                Guardar preferencias
+              </button>
+            </div>
+          </div>
+
+          <!-- ZONA DE PELIGRO -->
+          <div class="seccion-card peligro-card">
+            <div class="seccion-header">
+              <div class="seccion-icon red">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <div>
+                <h3 class="rojo">Zona de peligro</h3>
+                <p>Estas acciones son irreversibles. Procede con mucha precaución.</p>
+              </div>
+            </div>
+
+            <div class="peligro-lista">
+              <div class="peligro-item">
+                <div>
+                  <p class="peligro-titulo">Desactivar cuenta</p>
+                  <p class="peligro-desc">Tu cuenta será desactivada temporalmente. Podrás reactivarla iniciando sesión.</p>
+                </div>
+                <button class="btn-peligro-secundario" onclick="desactivarCuenta()">Desactivar cuenta</button>
+              </div>
+              <div class="peligro-item">
+                <div>
+                  <p class="peligro-titulo">Eliminar cuenta permanentemente</p>
+                  <p class="peligro-desc">Se eliminarán todos tus datos, citas e historial. Esta acción no se puede deshacer.</p>
+                </div>
+                <button class="btn-peligro" onclick="abrirModalEliminar()">Eliminar cuenta</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- COLUMNA LATERAL -->
+        <div class="aside-col">
+          <div class="aside-card">
+            <div class="aside-avatar">JR</div>
+            <p class="aside-nombre">Jesús Ramírez</p>
+            <p class="aside-rol">Administrador</p>
+            <p class="aside-correo">jesus@correo.com</p>
+            <div class="aside-divider"></div>
+            <div class="aside-info-lista">
+              <div class="aside-info-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" width="14" height="14"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span>Miembro desde <strong>Ene 2024</strong></span>
+              </div>
+              <div class="aside-info-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" width="14" height="14"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12 19.79 19.79 0 0 1 1.08 3.42 2 2 0 0 1 3.06 1.25h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6.29 6.29l1.32-1.22a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span>+57 310 123 4567</span>
+              </div>
+              <div class="aside-info-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" width="14" height="14"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Bogotá, Colombia</span>
+              </div>
+            </div>
+            <div class="aside-divider"></div>
+            <div class="aside-stats">
+              <div class="aside-stat">
+                <strong>12</strong>
+                <span>Citas</span>
+              </div>
+              <div class="aside-stat">
+                <strong>3</strong>
+                <span>Notif.</span>
+              </div>
+              <div class="aside-stat">
+                <strong>2</strong>
+                <span>Sesiones</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nav ajustes -->
+          <div class="aside-card">
+            <h4>Secciones</h4>
+            <div class="aside-nav">
+              <a href="#" class="aside-nav-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Información personal
+              </a>
+              <a href="#" class="aside-nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Contraseña
+              </a>
+              <a href="#" class="aside-nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                Notificaciones
+              </a>
+              <a href="#" class="aside-nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Seguridad
+              </a>
+              <a href="#" class="aside-nav-item rojo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                Zona de peligro
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <svg viewBox="0 0 40 40" fill="none" width="20" height="20">
+        <rect width="40" height="40" rx="10" fill="#1a56db"/>
+        <path d="M20 13V27M13 20H27" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      MediAgenda © 2025 &nbsp;•&nbsp; Todos los derechos reservados &nbsp;•&nbsp; Hecho en Colombia 🇨🇴
+    </div>
+    <div class="footer-right">
+      <a href="#">Términos y condiciones</a>
+      <a href="#">Política de privacidad</a>
+    </div>
+  </footer>
+
+  <!-- MODAL ELIMINAR CUENTA -->
+  <div class="modal-overlay" id="modal-eliminar">
+    <div class="modal-box-small">
+      <div class="modal-icono-error">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="28" height="28"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <h3>¿Eliminar cuenta permanentemente?</h3>
+      <p>Esta acción eliminará todos tus datos, citas e historial médico. <strong>No se puede deshacer.</strong></p>
+      <p class="modal-instruccion">Escribe <strong>ELIMINAR</strong> para confirmar:</p>
+      <div class="modal-input-wrap">
+        <input type="text" id="confirmar-eliminar" placeholder="Escribe ELIMINAR" oninput="validarEliminar()" />
+      </div>
+      <div class="modal-btns-row">
+        <button class="btn-modal-secundario" onclick="cerrarModal('modal-eliminar')">Cancelar</button>
+        <button class="btn-modal-danger" id="btn-confirmar-eliminar" onclick="confirmarEliminar()" disabled>Eliminar cuenta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DESACTIVAR -->
+  <div class="modal-overlay" id="modal-desactivar">
+    <div class="modal-box-small">
+      <div class="modal-icono-warning">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="28" height="28"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <h3>¿Desactivar tu cuenta?</h3>
+      <p>Tu cuenta será desactivada temporalmente. Podrás reactivarla iniciando sesión nuevamente.</p>
+      <div class="modal-btns-row">
+        <button class="btn-modal-secundario" onclick="cerrarModal('modal-desactivar')">Cancelar</button>
+        <button class="btn-modal-warning" onclick="confirmarDesactivar()">Sí, desactivar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/ajustes.js"></script>
+</body>
+</html>

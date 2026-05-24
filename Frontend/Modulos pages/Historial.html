@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediAgenda - Historial clínico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/historial.css">
+</head>
+<body>
+
+  <!-- PANTALLA DE VERIFICACIÓN -->
+  <div class="verificacion-overlay" id="verificacion-overlay">
+    <div class="verificacion-box">
+      <div class="verificacion-logo">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="10" fill="#1a56db"/>
+          <path d="M20 13V27M13 20H27" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span>MediAgenda</span>
+      </div>
+      <div class="verificacion-icono">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="2" width="36" height="36"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h2>Acceso restringido</h2>
+      <p>Este módulo contiene información médica sensible. Por favor verifica tu identidad para continuar.</p>
+
+      <div class="ver-alerta" id="ver-alerta" style="display:none;"></div>
+
+      <div class="ver-field">
+        <label>Rol de acceso</label>
+        <div class="ver-input-wrap select-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <select id="ver-rol">
+            <option value="" disabled selected>Selecciona tu rol</option>
+            <option value="paciente">Paciente</option>
+            <option value="medico">Médico tratante</option>
+            <option value="admin">Administrador</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="ver-field">
+        <label>Contraseña de acceso</label>
+        <div class="ver-input-wrap" id="ver-wrap-pass">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <input type="password" id="ver-pass" placeholder="Ingresa tu contraseña" />
+          <button class="eye-btn" onclick="toggleVerPass()">
+            <svg id="ver-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <button class="btn-verificar" onclick="verificarAcceso()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Verificar acceso
+      </button>
+      <p class="ver-nota">⚠ Todo acceso a este historial queda registrado por razones de seguridad.</p>
+    </div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL (oculto hasta verificar) -->
+  <div id="contenido-principal" style="display:none;">
+
+    <!-- HEADER -->
+    <header>
+      <a class="header-logo" href="dashboard.html">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="10" fill="#fff" fill-opacity="0.2"/>
+          <path d="M20 13V27M13 20H27" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        MediAgenda
+      </a>
+      <div class="header-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Buscar pacientes, citas, médicos..." />
+      </div>
+      <div class="header-right">
+        <a href="#" class="header-help">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+          ¿Necesitas ayuda?
+        </a>
+        <div class="notif-wrap" onclick="toggleNotif()">
+          <button class="notif-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="notif-badge" id="notif-badge">3</span>
+          </button>
+          <div class="notif-dropdown" id="notif-dropdown">
+            <div class="notif-header">
+              <span>Notificaciones</span>
+              <button onclick="marcarTodasLeidas()">Marcar todas como leídas</button>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+              <div class="notif-content"><p>Cita confirmada con Dra. Laura Méndez</p><span>22 May 2025 · 09:30 AM</span></div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+              <div class="notif-content"><p>Recordatorio: cita mañana a las 9:30 AM</p><span>Hace 2 horas</span></div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
+              <div class="notif-content"><p>Cita cancelada por Dr. Felipe Ruiz</p><span>Hace 1 día</span></div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="notif-content"><p>Historial clínico actualizado correctamente</p><span>Hace 3 días</span></div>
+            </div>
+            <div class="notif-footer"><a href="#">Ver todas las notificaciones</a></div>
+          </div>
+        </div>
+        <div class="profile-wrap">
+          <div class="profile-avatar">JR</div>
+          <div class="profile-dropdown">
+            <div class="profile-info">
+              <div class="profile-avatar-lg">JR</div>
+              <div>
+                <p class="profile-nombre">Jesús Ramírez</p>
+                <p class="profile-rol" id="profile-rol-text">Paciente</p>
+              </div>
+            </div>
+            <div class="profile-divider"></div>
+            <a href="#" class="profile-option">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Editar perfil
+            </a>
+            <a href="#" class="profile-option">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              Configuración
+            </a>
+            <div class="profile-divider"></div>
+            <a href="index.html" class="profile-option danger">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Cerrar sesión
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+
+      <!-- SIDEBAR -->
+      <aside>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Inicio
+          </a>
+          <a href="agendar.html" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Agendar cita
+          </a>
+          <a href="gestion-citas.html" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Mis citas
+          </a>
+          <a href="historial.html" class="nav-item active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            Historial clínico
+          </a>
+          <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            Notificaciones
+            <span class="badge">3</span>
+          </a>
+          <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Reportes administrativos
+          </a>
+          <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Gestión de usuarios
+          </a>
+          <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Ajustes de cuenta
+          </a>
+        </nav>
+        <a href="index.html" class="nav-item cerrar-sesion">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Cerrar sesión
+        </a>
+      </aside>
+
+      <!-- CONTENIDO -->
+      <main>
+        <div class="page-header">
+          <h1>Historial clínico autorizado</h1>
+          <p>Solo los usuarios autorizados pueden consultar información médica sensible.</p>
+        </div>
+
+        <!-- ALERTAS -->
+        <div id="alerta-alergia" class="alerta alerta-error" style="display:flex;">
+          <div class="alerta-icono">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="18" height="18"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="alerta-texto">
+            <strong>⚠ Alergia crítica registrada</strong>
+            <span>El paciente tiene alergia ALTA a la Penicilina. Verificar antes de prescribir cualquier medicamento.</span>
+          </div>
+        </div>
+
+        <div id="alerta-acceso" class="alerta alerta-success" style="display:flex;">
+          <div class="alerta-icono">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="alerta-texto">
+            <strong>Acceso registrado</strong>
+            <span id="alerta-acceso-texto">Tu acceso al historial clínico ha sido registrado correctamente.</span>
+          </div>
+        </div>
+
+        <div class="historial-grid">
+
+          <!-- COLUMNA IZQUIERDA -->
+          <div class="historial-main">
+
+            <!-- INFO PACIENTE -->
+            <div class="paciente-card">
+              <div class="paciente-avatar">JR</div>
+              <div class="paciente-info">
+                <h2>Jesús Ramírez</h2>
+                <p class="paciente-doc">CC 1.234.567.890</p>
+                <div class="paciente-tags">
+                  <span class="tag">Masculino</span>
+                  <span class="tag">34 años</span>
+                </div>
+              </div>
+              <div class="paciente-datos">
+                <div class="dato-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" width="14" height="14"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  <span>Tipo de sangre <strong>O+</strong></span>
+                </div>
+                <div class="dato-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" width="14" height="14"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12 19.79 19.79 0 0 1 1.08 3.42 2 2 0 0 1 3.06 1.25h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6.29 6.29l1.32-1.22a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  <span>+57 310 123 4567</span>
+                </div>
+                <div class="dato-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" width="14" height="14"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                  <span>Contacto: <strong>María Ramírez (Madre)</strong></span>
+                </div>
+                <div class="dato-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" width="14" height="14"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12 19.79 19.79 0 0 1 1.08 3.42 2 2 0 0 1 3.06 1.25h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6.29 6.29l1.32-1.22a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  <span>+57 311 987 6543</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- TABS -->
+            <div class="tabs-wrap">
+              <button class="tab active" onclick="cambiarTab('resumen')">Resumen clínico</button>
+              <button class="tab" onclick="cambiarTab('antecedentes')">Antecedentes</button>
+              <button class="tab" onclick="cambiarTab('alergias')">Alergias</button>
+              <button class="tab" onclick="cambiarTab('medicacion')">Medicación actual</button>
+              <button class="tab" onclick="cambiarTab('consultas')">Consultas previas</button>
+              <button class="tab" onclick="cambiarTab('examenes')">Exámenes y resultados</button>
+            </div>
+
+            <!-- TAB: RESUMEN -->
+            <div class="tab-content active" id="tab-resumen">
+              <div class="resumen-cards">
+                <div class="resumen-card blue">
+                  <div class="rc-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+                  <div>
+                    <p class="rc-titulo">Diagnóstico principal</p>
+                    <p class="rc-valor">Hipertensión arterial esencial (I10)</p>
+                    <p class="rc-sub">Diagnosticado el 15/01/2024</p>
+                  </div>
+                </div>
+                <div class="resumen-card green">
+                  <div class="rc-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+                  <div>
+                    <p class="rc-titulo">Antecedentes relevantes</p>
+                    <p class="rc-valor">Hipertensión arterial, dislipidemia.</p>
+                    <p class="rc-sub">Sin antecedentes quirúrgicos.</p>
+                  </div>
+                </div>
+                <div class="resumen-card purple">
+                  <div class="rc-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                  <div>
+                    <p class="rc-titulo">Últimas citas</p>
+                    <p class="rc-valor">2 citas en los últimos 6 meses</p>
+                    <a href="#" class="rc-link" onclick="cambiarTab('consultas')">Ver historial de citas</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="info-grid">
+                <div class="info-card">
+                  <div class="info-card-header">
+                    <div class="info-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                    <h4>Médico tratante</h4>
+                  </div>
+                  <p class="info-nombre">Dr. Andrés Gómez</p>
+                  <p class="info-esp">Cardiología</p>
+                </div>
+                <div class="info-card">
+                  <div class="info-card-header">
+                    <div class="info-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                    <h4>Observaciones</h4>
+                  </div>
+                  <p class="info-obs">Paciente estable con tratamiento antihipertensivo. Se recomienda control y seguimiento.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: ALERGIAS -->
+            <div class="tab-content" id="tab-alergias">
+              <div class="tabla-section">
+                <h3>Alergias registradas</h3>
+                <table>
+                  <thead>
+                    <tr><th>Alergia</th><th>Reacción</th><th>Severidad</th><th>Registrado el</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong style="color:#dc2626;">Penicilina</strong></td>
+                      <td>Erupción cutánea</td>
+                      <td><span class="severidad alta">Alta</span></td>
+                      <td>12/03/2023</td>
+                    </tr>
+                    <tr>
+                      <td>Mariscos</td>
+                      <td>Náuseas y vómito</td>
+                      <td><span class="severidad moderada">Moderada</span></td>
+                      <td>18/08/2022</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- TAB: MEDICACIÓN -->
+            <div class="tab-content" id="tab-medicacion">
+              <div class="tabla-section">
+                <h3>Medicación actual</h3>
+                <table>
+                  <thead>
+                    <tr><th>Medicamento</th><th>Dosis</th><th>Frecuencia</th><th>Prescrito por</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Losartán 50 mg</td>
+                      <td>50 mg</td>
+                      <td>1 vez al día</td>
+                      <td>Dr. Andrés Gómez</td>
+                    </tr>
+                    <tr>
+                      <td>Atorvastatina 20 mg</td>
+                      <td>20 mg</td>
+                      <td>1 vez al día</td>
+                      <td>Dr. Andrés Gómez</td>
+                    </tr>
+                    <tr>
+                      <td>Amlodipine 5 mg</td>
+                      <td>5 mg</td>
+                      <td>1 vez al día</td>
+                      <td>Dr. Andrés Gómez</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="alerta-interaccion">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2" width="16" height="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <p>Posible interacción entre Losartán y Amlodipine. Consulte con el médico tratante antes de modificar dosis.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: CONSULTAS -->
+            <div class="tab-content" id="tab-consultas">
+              <div class="tabla-section">
+                <h3>Consultas previas</h3>
+                <table>
+                  <thead>
+                    <tr><th>Fecha</th><th>Especialidad</th><th>Médico</th><th>Diagnóstico</th><th>Acciones</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>15 Abr 2025</td>
+                      <td>Cardiología</td>
+                      <td><div class="medico-cell"><div class="av-sm">AG</div> Dr. Andrés Gómez</div></td>
+                      <td>Control de hipertensión arterial</td>
+                      <td><button class="btn-ver-det">Ver detalle</button></td>
+                    </tr>
+                    <tr>
+                      <td>15 Mar 2025</td>
+                      <td>Cardiología</td>
+                      <td><div class="medico-cell"><div class="av-sm">AG</div> Dr. Andrés Gómez</div></td>
+                      <td>Ajuste de tratamiento antihipertensivo</td>
+                      <td><button class="btn-ver-det">Ver detalle</button></td>
+                    </tr>
+                    <tr>
+                      <td>12 Feb 2025</td>
+                      <td>Medicina general</td>
+                      <td><div class="medico-cell"><div class="av-sm">LG</div> Dra. Laura Gómez</div></td>
+                      <td>Control general</td>
+                      <td><button class="btn-ver-det">Ver detalle</button></td>
+                    </tr>
+                    <tr>
+                      <td>20 Dic 2024</td>
+                      <td>Cardiología</td>
+                      <td><div class="medico-cell"><div class="av-sm">AG</div> Dr. Andrés Gómez</div></td>
+                      <td>Seguimiento hipertensión</td>
+                      <td><button class="btn-ver-det">Ver detalle</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- TAB: ANTECEDENTES -->
+            <div class="tab-content" id="tab-antecedentes">
+              <div class="tabla-section">
+                <h3>Antecedentes médicos</h3>
+                <div class="antecedente-lista">
+                  <div class="antecedente-item">
+                    <span class="ant-tipo">Patológico</span>
+                    <p>Hipertensión arterial esencial desde 2020</p>
+                  </div>
+                  <div class="antecedente-item">
+                    <span class="ant-tipo">Patológico</span>
+                    <p>Dislipidemia diagnosticada en 2021</p>
+                  </div>
+                  <div class="antecedente-item">
+                    <span class="ant-tipo">Familiar</span>
+                    <p>Padre con diabetes tipo 2, madre con hipertensión</p>
+                  </div>
+                  <div class="antecedente-item">
+                    <span class="ant-tipo">Quirúrgico</span>
+                    <p>Sin antecedentes quirúrgicos</p>
+                  </div>
+                  <div class="antecedente-item">
+                    <span class="ant-tipo">Traumático</span>
+                    <p>Sin antecedentes traumáticos relevantes</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: EXÁMENES -->
+            <div class="tab-content" id="tab-examenes">
+              <div class="tabla-section">
+                <h3>Exámenes y resultados</h3>
+                <div class="alerta-examen">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2" width="16" height="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <p>El examen de colesterol tiene más de 6 meses. Se recomienda renovarlo pronto.</p>
+                </div>
+                <table>
+                  <thead>
+                    <tr><th>Examen</th><th>Fecha</th><th>Resultado</th><th>Estado</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Hemograma completo</td>
+                      <td>15 Abr 2025</td>
+                      <td>Normal</td>
+                      <td><span class="estado-examen vigente">Vigente</span></td>
+                    </tr>
+                    <tr>
+                      <td>Perfil lipídico</td>
+                      <td>20 Nov 2024</td>
+                      <td>Colesterol LDL: 145 mg/dL</td>
+                      <td><span class="estado-examen vencer">Por vencer</span></td>
+                    </tr>
+                    <tr>
+                      <td>Electrocardiograma</td>
+                      <td>15 Mar 2025</td>
+                      <td>Ritmo sinusal normal</td>
+                      <td><span class="estado-examen vigente">Vigente</span></td>
+                    </tr>
+                    <tr>
+                      <td>Glucemia en ayunas</td>
+                      <td>15 Abr 2025</td>
+                      <td>92 mg/dL</td>
+                      <td><span class="estado-examen vigente">Vigente</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- AVISO PRIVACIDAD -->
+            <div class="aviso-privacidad">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2" width="16" height="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <p><strong>Aviso de privacidad:</strong> el acceso al historial clínico está restringido a usuarios autorizados. Toda consulta o modificación será registrada.</p>
+            </div>
+
+          </div>
+
+          <!-- COLUMNA DERECHA -->
+          <div class="historial-aside">
+
+            <!-- Acceso autorizado -->
+            <div class="aside-card acceso-card">
+              <div class="acceso-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" width="18" height="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <strong>Acceso autorizado</strong>
+              </div>
+              <p>Tienes permiso para consultar este historial clínico.</p>
+              <div class="acceso-detalle">
+                <div class="acc-item">
+                  <span class="acc-label">Rol de acceso</span>
+                  <span class="acc-valor" id="acc-rol">—</span>
+                </div>
+                <div class="acc-item">
+                  <span class="acc-label">Acceso registrado</span>
+                  <span class="acc-valor" id="acc-fecha">—</span>
+                </div>
+                <div class="acc-item">
+                  <span class="acc-label">ID de sesión</span>
+                  <span class="acc-valor" style="font-size:0.75rem;">S-7F3A882C-91D4-47E1</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Privacidad -->
+            <div class="aside-card privacidad-card">
+              <div class="acceso-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="2" width="18" height="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <strong>Privacidad y seguridad</strong>
+              </div>
+              <p>Todos los accesos, consultas o modificaciones al historial clínico son registrados para garantizar la seguridad y la confidencialidad de la información del paciente.</p>
+            </div>
+
+            <!-- Resumen paciente -->
+            <div class="aside-card">
+              <h4>Resumen del paciente</h4>
+              <div class="resumen-paciente">
+                <div class="rp-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" width="16" height="16"><line x1="12" y1="20" x2="12" y2="4"/><line x1="8" y1="8" x2="12" y2="4"/><line x1="16" y1="8" x2="12" y2="4"/></svg>
+                  <span>Estatura</span>
+                  <strong>1.75 m</strong>
+                </div>
+                <div class="rp-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/></svg>
+                  <span>Peso</span>
+                  <strong>78 kg</strong>
+                </div>
+                <div class="rp-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" width="16" height="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                  <span>Alergias registradas</span>
+                  <strong>2</strong>
+                </div>
+                <div class="rp-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <span>Próxima cita</span>
+                  <strong>03 Jun 2025 · 11:00 AM</strong>
+                </div>
+              </div>
+              <button class="btn-ver-paciente">Ver detalles del paciente</button>
+            </div>
+
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-left">
+        <svg viewBox="0 0 40 40" fill="none" width="20" height="20">
+          <rect width="40" height="40" rx="10" fill="#1a56db"/>
+          <path d="M20 13V27M13 20H27" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        MediAgenda © 2025 &nbsp;•&nbsp; Todos los derechos reservados &nbsp;•&nbsp; Hecho en Colombia 🇨🇴
+      </div>
+      <div class="footer-right">
+        <a href="#">Términos y condiciones</a>
+        <a href="#">Política de privacidad</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="../js/historial.js"></script>
+</body>
+</html>
