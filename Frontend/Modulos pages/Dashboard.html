@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediAgenda - Panel principal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a class="header-logo" href="#">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="10" fill="#fff" fill-opacity="0.2"/>
+        <path d="M20 13V27M13 20H27" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      MediAgenda
+    </a>
+
+    <div class="header-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Buscar pacientes, citas, médicos..." />
+    </div>
+
+    <div class="header-right">
+
+      <!-- Notificaciones -->
+      <div class="notif-wrap" onclick="toggleNotif()">
+        <button class="notif-btn" aria-label="Notificaciones">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-badge" id="notif-badge">3</span>
+        </button>
+        <div class="notif-dropdown" id="notif-dropdown">
+          <div class="notif-header">
+            <span>Notificaciones</span>
+            <button onclick="marcarTodasLeidas()">Marcar todas como leídas</button>
+          </div>
+          <div class="notif-item unread">
+            <div class="notif-icon blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="notif-content">
+              <p>Cita confirmada con Dra. Laura Méndez</p>
+              <span>22 May 2025 · 09:30 AM</span>
+            </div>
+          </div>
+          <div class="notif-item unread">
+            <div class="notif-icon orange">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="notif-content">
+              <p>Recordatorio: cita mañana a las 9:30 AM</p>
+              <span>Hace 2 horas</span>
+            </div>
+          </div>
+          <div class="notif-item unread">
+            <div class="notif-icon red">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            </div>
+            <div class="notif-content">
+              <p>Cita cancelada por Dr. Felipe Ruiz</p>
+              <span>Hace 1 día</span>
+            </div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="notif-content">
+              <p>Historial clínico actualizado correctamente</p>
+              <span>Hace 3 días</span>
+            </div>
+          </div>
+          <div class="notif-footer">
+            <a href="#">Ver todas las notificaciones</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Perfil estilo Telegram -->
+      <div class="profile-wrap">
+        <div class="profile-avatar">JR</div>
+        <div class="profile-dropdown">
+          <div class="profile-info">
+            <div class="profile-avatar-lg">JR</div>
+            <div>
+              <p class="profile-nombre">Jesús Ramírez</p>
+              <p class="profile-rol">Administrador</p>
+            </div>
+          </div>
+          <div class="profile-divider"></div>
+          <a href="#" class="profile-option">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Editar perfil
+          </a>
+          <a href="#" class="profile-option">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Configuración
+          </a>
+          <div class="profile-divider"></div>
+          <a href="index.html" class="profile-option danger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Cerrar sesión
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- SIDEBAR BLANCA -->
+    <aside>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Inicio
+        </a>
+        <a href="#" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Agendar cita
+        </a>
+        <a href="#" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Mis citas
+        </a>
+        <a href="#" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Historial clínico
+        </a>
+        <a href="#" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Notificaciones
+          <span class="badge">3</span>
+        </a>
+        <a href="#" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Reportes administrativos
+        </a>
+        <a href="#" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Gestión de usuarios
+        </a>
+        <a href="#" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Ajustes de cuenta
+        </a>
+      </nav>
+      <a href="index.html" class="nav-item cerrar-sesion">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Cerrar sesión
+      </a>
+    </aside>
+
+    <!-- CONTENIDO -->
+    <main>
+      <div class="saludo">
+        <h1>Hola, Jesús 👋</h1>
+        <p>Este es el resumen de tu actividad en MediAgenda.</p>
+      </div>
+
+      <!-- TARJETAS RESUMEN -->
+      <div class="cards-grid">
+        <div class="summary-card">
+          <div class="summary-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <p class="summary-label">Próxima cita</p>
+          <p class="summary-number blue">22</p>
+          <p class="summary-sub">Mayo 2025</p>
+          <p class="summary-time">🕐 09:30 AM</p>
+          <a href="#" class="summary-link">Ver detalles ›</a>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <p class="summary-label">Citas programadas</p>
+          <p class="summary-number green">5</p>
+          <p class="summary-sub">En los próximos 30 días</p>
+          <a href="#" class="summary-link">Ver mis citas ›</a>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <p class="summary-label">Notificaciones</p>
+          <p class="summary-number orange">3</p>
+          <p class="summary-sub">Pendientes</p>
+          <a href="#" class="summary-link">Ver notificaciones ›</a>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon teal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <p class="summary-label">Historial clínico</p>
+          <p class="summary-number teal">Actualizado</p>
+          <p class="summary-sub">Última actualización</p>
+          <p class="summary-time">15 Abr 2025</p>
+          <a href="#" class="summary-link">Ver historial ›</a>
+        </div>
+      </div>
+
+      <div class="content-grid">
+        <!-- TABLA CITAS -->
+        <div class="citas-section">
+          <div class="section-header">
+            <h2>Próximas citas</h2>
+            <a href="#">Ver todas</a>
+          </div>
+          <div class="tabla-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Hora</th>
+                  <th>Médico</th>
+                  <th>Especialidad</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="fecha-cell">📅 22 May 2025<br><small>Jueves</small></span></td>
+                  <td>09:30 AM</td>
+                  <td><div class="medico-cell"><div class="avatar">LM</div> Dra. Laura Méndez</div></td>
+                  <td>Medicina General</td>
+                  <td><span class="estado confirmada">Confirmada</span></td>
+                </tr>
+                <tr>
+                  <td><span class="fecha-cell">📅 28 May 2025<br><small>Miércoles</small></span></td>
+                  <td>02:00 PM</td>
+                  <td><div class="medico-cell"><div class="avatar">AG</div> Dr. Andrés Gómez</div></td>
+                  <td>Cardiología</td>
+                  <td><span class="estado confirmada">Confirmada</span></td>
+                </tr>
+                <tr>
+                  <td><span class="fecha-cell">📅 03 Jun 2025<br><small>Martes</small></span></td>
+                  <td>11:00 AM</td>
+                  <td><div class="medico-cell"><div class="avatar">MS</div> Dra. María Solano</div></td>
+                  <td>Dermatología</td>
+                  <td><span class="estado pendiente">Pendiente</span></td>
+                </tr>
+                <tr>
+                  <td><span class="fecha-cell">📅 10 Jun 2025<br><small>Martes</small></span></td>
+                  <td>04:00 PM</td>
+                  <td><div class="medico-cell"><div class="avatar">FR</div> Dr. Felipe Ruiz</div></td>
+                  <td>Ortopedia</td>
+                  <td><span class="estado cancelada">Cancelada</span></td>
+                </tr>
+                <tr>
+                  <td><span class="fecha-cell">📅 17 Jun 2025<br><small>Martes</small></span></td>
+                  <td>10:30 AM</td>
+                  <td><div class="medico-cell"><div class="avatar">AT</div> Dra. Ana Torres</div></td>
+                  <td>Ginecología</td>
+                  <td><span class="estado pendiente">Pendiente</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- PANEL DERECHO -->
+        <div class="right-panel">
+          <div class="panel-card">
+            <h3>Acciones rápidas</h3>
+            <a href="#" class="accion-item">
+              <div class="accion-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/></svg></div>
+              <div class="accion-text"><strong>Agendar nueva cita</strong><span>Reservar una cita médica</span></div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+            <a href="#" class="accion-item">
+              <div class="accion-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+              <div class="accion-text"><strong>Ver historial clínico</strong><span>Consultar tu información</span></div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+            <a href="#" class="accion-item">
+              <div class="accion-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+              <div class="accion-text"><strong>Actualizar perfil</strong><span>Editar tus datos personales</span></div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+
+          <div class="panel-card consejo-card">
+            <h3>Consejo de salud</h3>
+            <div class="consejo-body">
+              <div class="consejo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="2" width="28" height="28"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+              <p>Mantén al día tus controles médicos y vive más saludable.</p>
+            </div>
+            <p class="consejo-sub">La prevención es el mejor cuidado.</p>
+          </div>
+
+          <div class="panel-card">
+            <h3>¿Necesitas ayuda?</h3>
+            <p style="font-size:0.85rem; color:#6b7280; margin-bottom:1rem;">Nuestro equipo está listo para ayudarte.</p>
+            <button class="btn-soporte">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12 19.79 19.79 0 0 1 1.08 3.42 2 2 0 0 1 3.06 1.25h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6.29 6.29l1.32-1.22a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Contactar soporte
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <svg viewBox="0 0 40 40" fill="none" width="20" height="20">
+        <rect width="40" height="40" rx="10" fill="#1a56db"/>
+        <path d="M20 13V27M13 20H27" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      MediAgenda © 2025 &nbsp;•&nbsp; Todos los derechos reservados &nbsp;•&nbsp; Hecho en Colombia 🇨🇴
+    </div>
+    <div class="footer-right">
+      <a href="#">Términos y condiciones</a>
+      <a href="#">Política de privacidad</a>
+    </div>
+  </footer>
+
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

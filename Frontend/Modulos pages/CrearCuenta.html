@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediAgenda - Crear cuenta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/registro.css">
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <nav>
+    <a class="nav-logo" href="index.html">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="10" fill="#1a56db"/>
+        <path d="M20 13V27M13 20H27" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      MediAgenda
+    </a>
+    <a href="#" class="nav-help">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+      ¿Necesitas ayuda?
+    </a>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+
+    <!-- LADO IZQUIERDO -->
+    <div class="hero">
+      <h1>Bienvenido a<br><span>MediAgenda</span></h1>
+      <p>Gestiona tus citas médicas de forma fácil, segura y eficiente.</p>
+      <div class="features">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="feature-text">
+            <strong>Agenda y administra</strong>
+            <span>tus citas médicas</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="feature-text">
+            <strong>Accede de forma segura</strong>
+            <span>a tu información</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="feature-text">
+            <strong>Atención médica</strong>
+            <span>más organizada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TARJETA FORMULARIO -->
+    <div class="register-card" id="card-registro">
+      <div class="card-logo">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="10" fill="#1a56db"/>
+          <path d="M20 13V27M13 20H27" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span>MediAgenda</span>
+      </div>
+
+      <!-- ALERTA DINÁMICA -->
+      <div class="alerta" id="alerta" style="display:none;"></div>
+
+      <!-- FORMULARIO -->
+      <div id="form-registro">
+        <div class="form-row">
+          <div class="field">
+            <label>Nombres <span class="req">*</span></label>
+            <div class="input-wrap" id="wrap-nombres">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <input type="text" id="nombres" placeholder="Ingresa tus nombres" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Apellidos <span class="req">*</span></label>
+            <div class="input-wrap" id="wrap-apellidos">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <input type="text" id="apellidos" placeholder="Ingresa tus apellidos" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label>Tipo de documento <span class="req">*</span></label>
+            <div class="input-wrap select-wrap" id="wrap-tipodoc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>
+              <select id="tipodoc">
+                <option value="" disabled selected>Selecciona el tipo</option>
+                <option value="cc">Cédula de ciudadanía</option>
+                <option value="ce">Cédula de extranjería</option>
+                <option value="ti">Tarjeta de identidad</option>
+                <option value="pa">Pasaporte</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Número de documento <span class="req">*</span></label>
+            <div class="input-wrap" id="wrap-numdoc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>
+              <input type="text" id="numdoc" placeholder="Ingresa tu número de documento" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label>Correo electrónico <span class="req">*</span></label>
+            <div class="input-wrap" id="wrap-correo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" id="correo" placeholder="ejemplo@correo.com" />
+            </div>
+            <p class="field-error" id="error-correo"></p>
+          </div>
+          <div class="field">
+            <label>Número telefónico <span class="req">*</span></label>
+            <div class="input-wrap" id="wrap-telefono">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12 19.79 19.79 0 0 1 1.08 3.42 2 2 0 0 1 3.06 1.25h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6.29 6.29l1.32-1.22a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <input type="tel" id="telefono" placeholder="Ingresa tu número telefónico" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label>Contraseña <span class="req">*</span></label>
+            <div class="input-wrap" id="wrap-pass1">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" id="pass1" placeholder="Crea una contraseña" />
+              <button class="eye-btn" onclick="togglePass('pass1','eye1')" aria-label="Mostrar">
+                <svg id="eye1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="field">
+            <label>Confirmar contraseña <span class="req">*</span></label>
+            <div class="input-wrap" id="wrap-pass2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" id="pass2" placeholder="Confirma tu contraseña" />
+              <button class="eye-btn" onclick="togglePass('pass2','eye2')" aria-label="Mostrar">
+                <svg id="eye2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <p class="field-error" id="error-pass"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Rol de usuario <span class="req">*</span></label>
+          <div class="input-wrap select-wrap" id="wrap-rol">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <select id="rol">
+              <option value="" disabled selected>Selecciona tu rol</option>
+              <option value="paciente">Paciente</option>
+              <option value="medico">Médico</option>
+              <option value="admin">Administrador</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="terms-check" id="wrap-terminos">
+          <input type="checkbox" id="terminos" />
+          <label for="terminos">
+            Acepto los <a href="#" onclick="abrirModal(event)">términos y condiciones</a>
+          </label>
+        </div>
+        <p class="field-error" id="error-terminos"></p>
+
+        <button class="btn-primary" onclick="validarFormulario()">Crear cuenta</button>
+        <button class="btn-secondary" onclick="window.location.href='index.html'">Iniciar sesión</button>
+      </div>
+
+      <!-- PANTALLA ÉXITO -->
+      <div id="pantalla-exito" style="display:none; text-align:center; padding: 1rem 0;">
+        <div class="exito-icono">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="48" height="48"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2 style="font-size:1.4rem; font-weight:700; color:#0f172a; margin-bottom:0.5rem;">Registro exitoso</h2>
+        <p style="font-size:0.875rem; color:#6b7280; margin-bottom:1.5rem; line-height:1.6;">Tu cuenta ha sido creada correctamente. Para activar tu perfil en MediAgenda, verifica el correo electrónico registrado.</p>
+        <div class="exito-alerta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Hemos enviado un enlace de verificación a tu correo.
+        </div>
+        <button class="btn-primary" onclick="window.location.href='index.html'" style="margin-top:1.25rem;">Volver al inicio de sesión</button>
+        <button class="btn-reenviar" onclick="reenviarCorreo()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Reenviar correo de verificación
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <svg viewBox="0 0 40 40" fill="none" width="20" height="20">
+        <rect width="40" height="40" rx="10" fill="#1a56db"/>
+        <path d="M20 13V27M13 20H27" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      MediAgenda © 2025 &nbsp;•&nbsp; Todos los derechos reservados &nbsp;•&nbsp; Hecho en Colombia 🇨🇴
+    </div>
+    <div class="footer-right">
+      <a href="#">Términos y condiciones</a>
+      <a href="#">Política de privacidad</a>
+    </div>
+  </footer>
+
+  <!-- MODAL TÉRMINOS -->
+  <div class="modal-overlay" id="modal-terminos">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-logo">
+          <svg viewBox="0 0 40 40" fill="none" width="22" height="22"><rect width="40" height="40" rx="10" fill="#1a56db"/><path d="M20 13V27M13 20H27" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
+          <span>MediAgenda</span>
+        </div>
+        <a href="#" class="modal-nav-link">Términos y condiciones</a>
+      </div>
+      <div class="modal-body">
+        <h2>Términos y condiciones de uso - MediAgenda</h2>
+        <p class="modal-intro">Bienvenido a MediAgenda, sistema digital para la gestión de citas médicas. Al crear una cuenta y utilizar la plataforma, el usuario acepta las siguientes condiciones de uso.</p>
+        <div class="termino-item"><h3>1. Aceptación del servicio</h3><p>El usuario acepta utilizar MediAgenda de manera responsable, únicamente para gestionar información relacionada con citas médicas, usuarios, notificaciones y servicios autorizados por la plataforma.</p></div>
+        <div class="termino-item"><h3>2. Registro de usuario</h3><p>Para acceder a las funciones del sistema, el usuario debe registrar información real, completa y actualizada. El correo electrónico será usado para verificar la cuenta y enviar comunicaciones del servicio.</p></div>
+        <div class="termino-item"><h3>3. Uso de la información personal</h3><p>Los datos suministrados serán tratados con fines de identificación, gestión de citas, envío de recordatorios, administración de usuarios y mejora del servicio, respetando la confidencialidad de la información.</p></div>
+        <div class="termino-item"><h3>4. Protección de datos médicos</h3><p>La información clínica o sensible solo podrá ser consultada por usuarios autorizados según su rol dentro del sistema. MediAgenda no debe usarse para divulgar datos médicos sin autorización.</p></div>
+        <div class="termino-item"><h3>5. Responsabilidad del usuario</h3><p>El usuario es responsable de mantener la confidencialidad de sus credenciales de acceso y de cerrar sesión cuando utilice equipos compartidos o públicos.</p></div>
+        <div class="termino-item"><h3>6. Gestión de citas médicas</h3><p>El sistema permite agendar, modificar, cancelar y consultar citas de acuerdo con la disponibilidad registrada por la institución o el profesional de salud.</p></div>
+        <div class="termino-item"><h3>7. Notificaciones y recordatorios</h3><p>MediAgenda podrá enviar recordatorios por correo electrónico o SMS sobre citas programadas, cambios, cancelaciones o avisos importantes relacionados con la atención médica.</p></div>
+        <div class="termino-item"><h3>8. Restricciones de uso</h3><p>No está permitido alterar el funcionamiento del sistema, ingresar información falsa, acceder a cuentas ajenas, manipular reportes o intentar consultar información sin autorización.</p></div>
+        <div class="termino-item"><h3>9. Actualización de condiciones</h3><p>MediAgenda podrá actualizar estos términos cuando sea necesario. Los cambios serán informados por los medios disponibles dentro de la plataforma.</p></div>
+        <div class="modal-importante">
+          <span>⚠ Importante</span>
+          <p>La aceptación de estos términos y condiciones es obligatoria para completar el registro. Si no estás de acuerdo, no podrás acceder a los servicios de MediAgenda.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-aceptar" onclick="aceptarTerminos()">Aceptar y continuar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/registro.js"></script>
+</body>
+</html>
