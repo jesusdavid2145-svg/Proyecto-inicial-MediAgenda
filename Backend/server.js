@@ -12,6 +12,7 @@ app.use(express.json());
 app.use('/api/auth',    require('./routes/auth'));
 app.use('/api/citas',   require('./routes/citas'));
 app.use('/api/medicos', require('./routes/medicos'));
+app.use('/api/notificaciones', require('./routes/notificaciones'));
 
 // Ruta de prueba
 app.get('/', (req, res) => {

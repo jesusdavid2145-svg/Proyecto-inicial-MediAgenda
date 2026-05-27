@@ -2,11 +2,44 @@ const API = "http://localhost:3000/api";
 
 function getToken() { return localStorage.getItem('token'); }
 
+// =====================
+// CARGAR NOTIFICACIONES DESDE EL BACKEND
+// =====================
+async function cargarNotificaciones() {
+  try {
+    const res = await fetch(`${API}/notificaciones`, {
+      headers: { 'Authorization': `Bearer ${getToken()}` }
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      notificaciones = data.map(n => ({
+        id:          n.id,
+        tipo:        n.tipo || 'sistema',
+        icono:       n.tipo === 'cita' ? 'blue' : n.tipo === 'recordatorio' ? 'orange' : 'green',
+        titulo:      n.titulo,
+        descripcion: n.mensaje,
+        fecha:       new Date(n.creado_en).toLocaleDateString('es-CO'),
+        tag:         n.leida ? 'leida' : 'no-leida',
+        tagLabel:    n.leida ? 'Leída' : 'No leída',
+        leida:       n.leida === 1,
+        archivada:   false
+      }));
+    }
+  } catch (err) {
+    console.error('Error cargando notificaciones:', err);
+  }
+  renderLista();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   if (!getToken()) { window.location.href = 'Loginindex.html'; return; }
-  renderLista();
+  cargarNotificaciones();
 });
 
+// =====================
+// DATOS LOCALES
+// =====================
 let notificaciones = [
   { id: 0, tipo: 'recordatorio', icono: 'blue', titulo: 'Recordatorio de cita', descripcion: 'Tienes una cita de Medicina general mañana a las 10:30 AM.', fecha: 'Hoy, 09:15 AM', tag: 'no-leida', tagLabel: 'No leída', leida: false, archivada: false },
   { id: 1, tipo: 'recordatorio', icono: 'orange', titulo: 'Cita reprogramada', descripcion: 'Tu cita de Dermatología fue reprogramada.', fecha: 'Ayer, 04:32 PM', tag: 'importante', tagLabel: 'Importante', leida: false, archivada: false },
@@ -16,13 +49,16 @@ let notificaciones = [
 
 let filtroActivo = 'todas';
 
+// =====================
+// RENDERIZAR
+// =====================
 function renderLista() {
   const contenedor = document.getElementById('lista-notificaciones');
   if (!contenedor) return;
   contenedor.innerHTML = '';
 
   let lista = notificaciones.filter(n => !n.archivada);
-  if (filtroActivo === 'no-leida')         lista = lista.filter(n => !n.leida);
+  if (filtroActivo === 'no-leida')          lista = lista.filter(n => !n.leida);
   else if (filtroActivo === 'recordatorio') lista = lista.filter(n => n.tipo === 'recordatorio');
   else if (filtroActivo === 'sistema')      lista = lista.filter(n => n.tipo === 'sistema');
 
@@ -61,6 +97,9 @@ function renderLista() {
   actualizarContadores();
 }
 
+// =====================
+// FILTRAR
+// =====================
 function filtrar(tipo, btn) {
   filtroActivo = tipo;
   document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
@@ -68,16 +107,30 @@ function filtrar(tipo, btn) {
   renderLista();
 }
 
-function marcarLeida(id) {
+// =====================
+// MARCAR LEÍDA
+// =====================
+async function marcarLeida(id) {
   const n = notificaciones.find(n => n.id === id);
   if (!n) return;
-  n.leida = !n.leida;
+
+  try {
+    await fetch(`${API}/notificaciones/${id}/leer`, {
+      method: 'PUT',
+      headers: { 'Authorization': `Bearer ${getToken()}` }
+    });
+  } catch (err) { console.error(err); }
+
+  n.leida    = !n.leida;
   n.tag      = n.leida ? 'leida'  : 'no-leida';
   n.tagLabel = n.leida ? 'Leída' : 'No leída';
   renderLista();
   mostrarAlerta('success', n.leida ? 'Marcada como leída' : 'Marcada como no leída', '');
 }
 
+// =====================
+// ARCHIVAR
+// =====================
 function archivar(id) {
   const n = notificaciones.find(n => n.id === id);
   if (!n) return;
@@ -86,7 +139,17 @@ function archivar(id) {
   mostrarAlerta('info', 'Notificación archivada', 'La notificación fue archivada correctamente.');
 }
 
-function marcarTodasLeidas() {
+// =====================
+// MARCAR TODAS LEÍDAS
+// =====================
+async function marcarTodasLeidas() {
+  try {
+    await fetch(`${API}/notificaciones/leer-todas`, {
+      method: 'PUT',
+      headers: { 'Authorization': `Bearer ${getToken()}` }
+    });
+  } catch (err) { console.error(err); }
+
   notificaciones.forEach(n => { n.leida = true; n.tag = 'leida'; n.tagLabel = 'Leída'; });
   const badge = document.getElementById('notif-badge');
   if (badge) badge.style.display = 'none';
@@ -94,6 +157,9 @@ function marcarTodasLeidas() {
   mostrarAlerta('success', 'Todas leídas', 'Todas las notificaciones fueron marcadas como leídas.');
 }
 
+// =====================
+// CONTADORES
+// =====================
 function actualizarContadores() {
   const noLeidas = notificaciones.filter(n => !n.leida && !n.archivada).length;
   const countEl  = document.getElementById('count-noleidas');
@@ -102,6 +168,9 @@ function actualizarContadores() {
   if (badge) { badge.style.display = noLeidas > 0 ? 'flex' : 'none'; badge.textContent = noLeidas; }
 }
 
+// =====================
+// NOTIFICACIONES HEADER
+// =====================
 function toggleNotif() { document.getElementById('notif-dropdown')?.classList.toggle('active'); }
 
 document.addEventListener('click', function(e) {
@@ -110,12 +179,18 @@ document.addEventListener('click', function(e) {
   if (wrap && drop && !wrap.contains(e.target)) drop.classList.remove('active');
 });
 
+// =====================
+// CERRAR SESIÓN
+// =====================
 function cerrarSesion() {
   localStorage.removeItem('token');
   localStorage.removeItem('usuario');
   window.location.href = 'Loginindex.html';
 }
 
+// =====================
+// ALERTAS
+// =====================
 function mostrarAlerta(tipo, titulo, mensaje) {
   const alerta = document.getElementById('alerta-global');
   if (!alerta) return;

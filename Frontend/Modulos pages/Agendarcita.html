@@ -9,31 +9,22 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
-    <a class="header-logo" href="dashboard.html">
+    <a class="header-logo" href="Dashboard.html">
       <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="40" height="40" rx="10" fill="#fff" fill-opacity="0.2"/>
         <path d="M20 13V27M13 20H27" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
       </svg>
       MediAgenda
     </a>
-
     <div class="header-search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" placeholder="Buscar pacientes, citas, médicos..." />
     </div>
-
     <div class="header-right">
-      <a href="#" class="header-help">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
-        ¿Necesitas ayuda?
-      </a>
-
-      <!-- Notificaciones -->
       <div class="notif-wrap" onclick="toggleNotif()">
         <button class="notif-btn" aria-label="Notificaciones">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <span class="notif-badge" id="notif-badge">3</span>
         </button>
         <div class="notif-dropdown" id="notif-dropdown">
@@ -41,48 +32,23 @@
             <span>Notificaciones</span>
             <button onclick="marcarTodasLeidas()">Marcar todas como leídas</button>
           </div>
-          <div class="notif-item unread">
-            <div class="notif-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-            <div class="notif-content"><p>Cita confirmada con Dra. Laura Méndez</p><span>22 May 2025 · 09:30 AM</span></div>
-          </div>
-          <div class="notif-item unread">
-            <div class="notif-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-            <div class="notif-content"><p>Recordatorio: cita mañana a las 9:30 AM</p><span>Hace 2 horas</span></div>
-          </div>
-          <div class="notif-item unread">
-            <div class="notif-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
-            <div class="notif-content"><p>Cita cancelada por Dr. Felipe Ruiz</p><span>Hace 1 día</span></div>
-          </div>
-          <div class="notif-item">
-            <div class="notif-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="notif-content"><p>Historial clínico actualizado correctamente</p><span>Hace 3 días</span></div>
-          </div>
-          <div class="notif-footer"><a href="#">Ver todas las notificaciones</a></div>
+          <div class="notif-footer"><a href="Notificaciones.html">Ver todas las notificaciones</a></div>
         </div>
       </div>
-
-      <!-- Perfil estilo Telegram -->
       <div class="profile-wrap">
         <div class="profile-avatar">JR</div>
         <div class="profile-dropdown">
           <div class="profile-info">
             <div class="profile-avatar-lg">JR</div>
-            <div>
-              <p class="profile-nombre">Jesús Ramírez</p>
-              <p class="profile-rol">Administrador</p>
-            </div>
+            <div><p class="profile-nombre usuario-nombre">Usuario</p><p class="profile-rol">Paciente</p></div>
           </div>
           <div class="profile-divider"></div>
-          <a href="#" class="profile-option">
+          <a href="Ajustes.html" class="profile-option">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             Editar perfil
           </a>
-          <a href="#" class="profile-option">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-            Configuración
-          </a>
           <div class="profile-divider"></div>
-          <a href="index.html" class="profile-option danger">
+          <a href="Loginindex.html" class="profile-option danger" onclick="cerrarSesion()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
             Cerrar sesión
           </a>
@@ -92,187 +58,102 @@
   </header>
 
   <div class="layout">
-
-    <!-- SIDEBAR -->
     <aside>
       <nav class="sidebar-nav">
-        <a href="dashboard.html" class="nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <a href="Dashboard.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           Inicio
         </a>
-        <a href="agendar.html" class="nav-item active">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <a href="Agendarcita.html" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           Agendar cita
         </a>
-        <a href="#" class="nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <a href="Gestioncitas.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Mis citas
         </a>
-        <a href="#" class="nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <a href="Historial.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           Historial clínico
         </a>
-        <a href="#" class="nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <a href="Notificaciones.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           Notificaciones
           <span class="badge">3</span>
         </a>
-        <a href="#" class="nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <a href="Reportes.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           Reportes administrativos
         </a>
         <a href="#" class="nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
           Gestión de usuarios
         </a>
-        <a href="#" class="nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <a href="Ajustes.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
           Ajustes de cuenta
         </a>
       </nav>
-      <a href="index.html" class="nav-item cerrar-sesion">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <a href="Loginindex.html" class="nav-item cerrar-sesion" onclick="cerrarSesion()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
         Cerrar sesión
       </a>
     </aside>
 
-    <!-- CONTENIDO -->
     <main>
       <div class="page-header">
         <h1>Agendar cita médica</h1>
         <p>Selecciona la especialidad, el médico, la fecha y el horario disponible para programar tu atención.</p>
       </div>
 
-      <!-- ALERTA -->
       <div class="alerta" id="alerta" style="display:none;"></div>
 
       <div class="agendar-grid">
-
-        <!-- FORMULARIO -->
         <div class="form-section">
-
-          <!-- Especialidad y Médico -->
           <div class="form-row">
             <div class="field">
               <label>Especialidad médica</label>
               <div class="input-wrap select-wrap" id="wrap-especialidad">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                <select id="especialidad" onchange="actualizarResumen(); actualizarRecomendaciones();">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                <select id="especialidad" onchange="cargarMedicos(); actualizarResumen(); actualizarRecomendaciones();">
                   <option value="" disabled selected>Selecciona una especialidad</option>
-                  <option value="medicina-general">Medicina general</option>
-                  <option value="cardiologia">Cardiología</option>
-                  <option value="dermatologia">Dermatología</option>
-                  <option value="pediatria">Pediatría</option>
-                  <option value="ginecologia">Ginecología</option>
-                  <option value="ortopedia">Ortopedia</option>
-                  <option value="neurologia">Neurología</option>
                 </select>
               </div>
             </div>
             <div class="field">
               <label>Médico disponible</label>
               <div class="input-wrap select-wrap" id="wrap-medico">
-                <div class="medico-avatar-sm">LG</div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 <select id="medico" onchange="actualizarResumen()">
                   <option value="" disabled selected>Selecciona un médico</option>
-                  <option value="laura-gomez">Dra. Laura Gómez</option>
-                  <option value="andres-gomez">Dr. Andrés Gómez</option>
-                  <option value="maria-solano">Dra. María Solano</option>
-                  <option value="felipe-ruiz">Dr. Felipe Ruiz</option>
-                  <option value="ana-torres">Dra. Ana Torres</option>
                 </select>
               </div>
             </div>
           </div>
 
-          <!-- Fecha y Hora -->
-          <div class="form-row">
-            <div class="field">
-              <label>Fecha de atención</label>
-              <div class="input-wrap select-wrap" id="wrap-fecha">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                <select id="fecha" onchange="actualizarResumen()">
-                  <option value="" disabled selected>Selecciona una fecha</option>
-                  <option value="mar-27-mayo">Martes, 27 de mayo de 2025</option>
-                  <option value="mie-28-mayo">Miércoles, 28 de mayo de 2025</option>
-                  <option value="jue-29-mayo">Jueves, 29 de mayo de 2025</option>
-                  <option value="vie-30-mayo">Viernes, 30 de mayo de 2025</option>
-                </select>
-              </div>
-            </div>
-            <div class="field">
-              <label>Hora disponible</label>
-              <div class="input-wrap select-wrap" id="wrap-hora">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <select id="hora" onchange="actualizarResumen()">
-                  <option value="" disabled selected>Selecciona una hora</option>
-                  <option value="08:00 AM">08:00 AM</option>
-                  <option value="08:30 AM">08:30 AM</option>
-                  <option value="09:00 AM">09:00 AM</option>
-                  <option value="09:30 AM">09:30 AM</option>
-                  <option value="10:00 AM">10:00 AM</option>
-                  <option value="10:30 AM">10:30 AM</option>
-                  <option value="11:00 AM">11:00 AM</option>
-                  <option value="11:30 AM">11:30 AM</option>
-                  <option value="02:00 PM">02:00 PM</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <!-- Modalidad y Sede -->
           <div class="form-row">
             <div class="field">
               <label>Modalidad</label>
               <div class="input-wrap select-wrap" id="wrap-modalidad">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                 <select id="modalidad" onchange="actualizarResumen(); toggleSede();">
                   <option value="" disabled selected>Selecciona modalidad</option>
                   <option value="presencial">Presencial</option>
                   <option value="virtual">Virtual</option>
-                  <option value="domiciliaria">Domiciliaria</option>
                 </select>
               </div>
             </div>
             <div class="field" id="campo-sede">
               <label>Sede</label>
-              <div class="sede-wrap">
-                <div class="input-wrap select-wrap" id="wrap-sede">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  <select id="sede" onchange="actualizarMapa()">
-                    <option value="" disabled selected>Selecciona una sede</option>
-                    <option value="norte">Sede Norte - Consultorio 203</option>
-                    <option value="sur">Sede Sur - Consultorio 105</option>
-                    <option value="centro">Sede Centro - Consultorio 301</option>
-                    <option value="occidente">Sede Occidente - Consultorio 210</option>
-                  </select>
-                </div>
-                <button class="btn-mapa" onclick="toggleMapa()" title="Ver ubicación">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                </button>
-              </div>
-
-              <!-- MAPA -->
-              <div class="mapa-card" id="mapa-card" style="display:none;">
-                <div class="mapa-frame-wrap">
-                  <iframe id="mapa-iframe" src="" width="100%" height="200" style="border:0; border-radius:10px;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-                <div class="mapa-info" id="mapa-info"></div>
-                <div class="mapa-btns">
-                  <a class="btn-nav google" id="btn-google" href="#" target="_blank">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    Google Maps
-                  </a>
-                  <a class="btn-nav waze" id="btn-waze" href="#" target="_blank">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                    Waze
-                  </a>
-                </div>
+              <div class="input-wrap select-wrap" id="wrap-sede">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <select id="sede" onchange="actualizarResumen()">
+                  <option value="" disabled selected>Selecciona una sede</option>
+                </select>
               </div>
             </div>
           </div>
 
-          <!-- Motivo -->
           <div class="field" style="margin-bottom:1rem;">
             <label>Motivo de consulta <span class="opcional">(opcional)</span></label>
             <div class="textarea-wrap">
@@ -281,16 +162,14 @@
             </div>
           </div>
 
-          <!-- Recomendaciones -->
           <div class="recomendaciones" id="recomendaciones" style="display:none;">
             <div class="rec-header">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2" width="18" height="18"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2" width="18" height="18"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
               <strong>Recomendaciones para tu cita</strong>
             </div>
             <ul id="rec-lista"></ul>
           </div>
 
-          <!-- Calendario y Horarios -->
           <div class="cal-horarios-grid">
             <div class="calendario-wrap">
               <div class="cal-header">
@@ -303,61 +182,35 @@
                 <span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
               </div>
               <div class="cal-dias" id="cal-dias"></div>
-              <div class="cal-leyenda">
-                <span class="punto-azul"></span> Día con disponibilidad
-              </div>
             </div>
             <div class="horarios-wrap">
               <p class="horarios-titulo">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                Horarios disponibles &nbsp;<small>Hora local</small>
+                Horarios disponibles
               </p>
               <div class="horarios-grid" id="horarios-grid"></div>
             </div>
           </div>
 
-          <!-- Aviso SMS -->
-          <div class="aviso-sms">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="2" width="20" height="20"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <div>
-              <strong>Recibirás un recordatorio por correo electrónico o SMS</strong>
-              <p>Te enviaremos los detalles de tu cita y podrás gestionarla desde Mis citas.</p>
-            </div>
-          </div>
-
-          <!-- Botones -->
           <div class="form-btns">
-            <button class="btn-cancelar" onclick="window.location.href='dashboard.html'">Cancelar</button>
+            <button class="btn-cancelar" onclick="window.location.href='Dashboard.html'">Cancelar</button>
             <button class="btn-agendar" onclick="agendarCita()">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
               Agendar cita
             </button>
           </div>
-
         </div>
 
-        <!-- RESUMEN -->
         <div class="resumen-section">
           <h3>Resumen de la cita</h3>
-          <div class="resumen-disponibilidad">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" width="18" height="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <div>
-              <strong>Disponibilidad confirmada</strong>
-              <p>El horario seleccionado está disponible.</p>
-            </div>
-          </div>
           <div class="resumen-items">
-            <div class="resumen-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <div><span class="resumen-label">Paciente</span><p class="resumen-valor">Jesús Ramírez</p><p class="resumen-sub">CC 1.234.567.890</p></div>
-            </div>
             <div class="resumen-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" width="16" height="16"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
               <div><span class="resumen-label">Especialidad</span><p class="resumen-valor" id="resumen-especialidad">— Selecciona</p></div>
             </div>
             <div class="resumen-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <div><span class="resumen-label">Médico</span><p class="resumen-valor" id="resumen-medico">— Selecciona</p><p class="resumen-sub" id="resumen-medico-esp"></p></div>
+              <div><span class="resumen-label">Médico</span><p class="resumen-valor" id="resumen-medico">— Selecciona</p></div>
             </div>
             <div class="resumen-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -368,31 +221,22 @@
               <div><span class="resumen-label">Hora</span><p class="resumen-valor" id="resumen-hora">— Selecciona</p></div>
             </div>
             <div class="resumen-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" width="16" height="16"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" width="16" height="16"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
               <div><span class="resumen-label">Modalidad</span><p class="resumen-valor" id="resumen-modalidad">— Selecciona</p></div>
             </div>
             <div class="resumen-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" width="16" height="16"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <div><span class="resumen-label">Sede</span><p class="resumen-valor" id="resumen-sede">— Selecciona</p><p class="resumen-sub" id="resumen-consultorio"></p></div>
+              <div><span class="resumen-label">Sede</span><p class="resumen-valor" id="resumen-sede">— Selecciona</p></div>
             </div>
           </div>
-          <div class="resumen-seguridad">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="2" width="16" height="16"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <p>Tu información está protegida. Cumplimos con los más altos estándares de seguridad y privacidad.</p>
-          </div>
         </div>
-
       </div>
     </main>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-left">
-      <svg viewBox="0 0 40 40" fill="none" width="20" height="20">
-        <rect width="40" height="40" rx="10" fill="#1a56db"/>
-        <path d="M20 13V27M13 20H27" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-      </svg>
+      <svg viewBox="0 0 40 40" fill="none" width="20" height="20"><rect width="40" height="40" rx="10" fill="#1a56db"/><path d="M20 13V27M13 20H27" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
       MediAgenda © 2025 &nbsp;•&nbsp; Todos los derechos reservados &nbsp;•&nbsp; Hecho en Colombia 🇨🇴
     </div>
     <div class="footer-right">
@@ -401,30 +245,6 @@
     </div>
   </footer>
 
-  <!-- MODAL ÉXITO -->
-  <div class="modal-overlay" id="modal-exito">
-    <div class="modal-box-small">
-      <div class="modal-icono-exito">
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="32" height="32"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-      <h3>Cita agendada correctamente</h3>
-      <p>La cita fue agendada correctamente. Hemos enviado los detalles de tu cita a tu correo electrónico.</p>
-      <button class="btn-modal-aceptar" onclick="cerrarModalExito()">Aceptar</button>
-    </div>
-  </div>
-
-  <!-- MODAL ERROR -->
-  <div class="modal-overlay" id="modal-error">
-    <div class="modal-box-small">
-      <div class="modal-icono-error">
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="32" height="32"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      </div>
-      <h3 id="modal-error-titulo">No es posible agendar la cita</h3>
-      <p id="modal-error-msg">No fue posible completar la acción. Elige un horario diferente.</p>
-      <button class="btn-modal-aceptar" onclick="cerrarModalError()">Aceptar</button>
-    </div>
-  </div>
-
-  <script src="../js/agendar.js"></script>
+  <script src="../js/Agendarcita.js"></script>
 </body>
 </html>
